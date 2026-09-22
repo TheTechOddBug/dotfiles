@@ -45,7 +45,7 @@ n ()
 
     [ ! -f "$NNN_TMPFILE" ] || {
         . "$NNN_TMPFILE"
-        rm -f "$NNN_TMPFILE" > /dev/null
+        command rm -f "$NNN_TMPFILE" > /dev/null
     }
 }
 alias nnn="n"

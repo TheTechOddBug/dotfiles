@@ -20,4 +20,5 @@ fi
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
-source "$ZDOTDIR/.zshenv"
+# NOTE: Do not source $ZDOTDIR/.zshenv here. Zsh loads it automatically right
+# after this system file, so sourcing it would load it twice and defeat `zsh -f`.

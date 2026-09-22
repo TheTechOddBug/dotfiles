@@ -42,10 +42,6 @@ export XDG_STATE_HOME="$HOME/.local/state"
 # House Cleaning (~ cleanup)
 ############################
 
-export npm_config_userconfig=$XDG_CONFIG_HOME/npm/config
-export npm_config_cache=$XDG_CACHE_HOME/npm
-export PATH=$PATH:$XDG_DATA_HOME/npm/bin
-
 export BUNDLE_USER_HOME="$XDG_CACHE_HOME"/bundle
 export WEGORC="$XDG_CONFIG_HOME"/wegorc
 export IRBRC="$XDG_CONFIG_HOME"/irb/irbrc
@@ -132,7 +128,7 @@ export STACK_ROOT="$XDG_DATA_HOME"/stack
 # Node / npm
 # https://github.com/npm/npm/issues/6675#issuecomment-251049832
 export NODE_REPL_HISTORY="$XDG_CACHE_HOME"/node_repl_history
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/config
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME"/npm
 export NVM_DIR="$HOME/.config/nvm"
 
@@ -186,7 +182,7 @@ elif [ "$OS" = "Linux" ]; then
     export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
     export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
     export PATH="$PATH:/usr/lib/w3m/w3mimgdisplay"
-    export PATH="/snap/bin::$PATH"
+    export PATH="/snap/bin:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists

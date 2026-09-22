@@ -45,8 +45,8 @@ alias pipup='pip list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 
 alias zcomet_up='zcomet self-update && zcomet update'
 
 if [ "$OS" = "Darwin" ]; then
-    alias brewup='brew update; brew upgrade; brew cask upgrade; brew cleanup; brew doctor;'
-    alias update='rustup update; cargo install-update -a; brewup; echo -n "\n1Password: $(op update)\n"; vimup; zcomet_up; -u; npm update -g;'
+    alias brewup='brew update; brew upgrade; brew cleanup; brew doctor;'
+    alias update='rustup update; cargo install-update -a; brewup; echo -n "\n1Password: $(op update)\n"; vimup; zcomet_up; npm update -g;'
 elif [ "$OS" = "Linux" ]; then
     if [ -f /etc/lsb-release ] && grep -q "Ubuntu" /etc/lsb-release; then
         alias apt='nala'

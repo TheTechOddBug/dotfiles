@@ -26,8 +26,18 @@ export VISUAL='nvim'
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share"
-export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share"
+# Default per XDG spec when unset (avoids a leading empty entry, which means $PWD).
+: "${XDG_DATA_DIRS:=/usr/local/share:/usr/share}"
+# Append Flatpak export dirs idempotently so re-sourcing doesn't duplicate them.
+case ":$XDG_DATA_DIRS:" in
+    *:/var/lib/flatpak/exports/share:*) ;;
+    *) XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share" ;;
+esac
+case ":$XDG_DATA_DIRS:" in
+    *:"$HOME/.local/share/flatpak/exports/share":*) ;;
+    *) XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share" ;;
+esac
+export XDG_DATA_DIRS
 [ "$OS" = "Linux" ] && export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 export XDG_STATE_HOME="$HOME/.local/state"
 

@@ -19,13 +19,6 @@ export PAGER='bat'
 export MANPAGER='nvim +Man!'
 export VISUAL='nvim'
 
-########
-# Debian
-########
-
-export DEBEMAIL="aaronlichtman@gmail.com"
-export DEBFULLNAME="Aaron Lichtman"
-
 #####
 # XDG
 #####
@@ -230,9 +223,6 @@ if [ "$OS" = "Linux" ]; then
     # I use gpaste now
     #pgrep greenclip >/dev/null || (bash -c "greenclip daemon > /dev/null 2>&1 &")
 fi
-
-# Needed to build things with alsa. Idk why this isn't set by default?
-export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig/"
 
 # vim: ts=4 sw=4 tw=0 et ft=zsh :
 . "$XDG_DATA_HOME/cargo/env"

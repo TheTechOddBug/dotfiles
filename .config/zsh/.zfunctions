@@ -59,8 +59,9 @@ alias nnn="n"
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
 function fo() {
-	local files
-	IFS=$'\n' files=($(fzf --preview="bat {} --color=always {}" --preview-window=right:70%:wrap --query="$1" --multi --select-1 --exit-0))
+	local -a files
+	local IFS=$'\n'
+	files=($(fzf --preview="bat {} --color=always {}" --preview-window=right:70%:wrap --query="$1" --multi --select-1 --exit-0))
 	[[ -n "$files" ]] && ${EDITOR} "${files[@]}"
 }
 
@@ -115,9 +116,9 @@ function config() {
 alias cfg=config
 
 # Refresh zsh config env
-function resource() (
-    # The outer function definition with () makes this behave like nested python functions. https://stackoverflow.com/a/31316688/8740440
-    function _source_files () {
+function resource() {
+    function _resource_source_files () {
+	    local file
 	    for file in "$@"; do
 		    if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 			    echo "Sourcing $file";
@@ -126,14 +127,14 @@ function resource() (
 			    echo "Unable to source $file for some reason."
 		    fi
 	    done
-	    unset file
     }
 
     # MUST be first
-    _source_files "$ZDOTDIR/.zshenv"
-    _source_files $ZDOTDIR/.{zprofile,aliases,zshrc,zfunctions}
-    _source_files "$XDG_CONFIG_HOME/.secrets"
-)
+    _resource_source_files "$ZDOTDIR/.zshenv"
+    _resource_source_files $ZDOTDIR/.{zprofile,aliases,zshrc,zfunctions}
+    _resource_source_files "$XDG_CONFIG_HOME/.secrets"
+    unfunction _resource_source_files
+}
 
 # END Dotfiles }}}
 
@@ -180,7 +181,7 @@ function tre() {
 
 # Make a directory and cd into it.
 function mk() {
-	mkdir "$1" && cd "$1" || exit;
+	mkdir "$1" && cd "$1" || return 1;
 }
 
 # Copy file contents to clipboard.

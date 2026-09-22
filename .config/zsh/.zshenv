@@ -202,8 +202,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$HOME/.local/share/gem/bin:$PATH"
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.1.0/bin"
 
-
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+# NOTE: nvm (slow, interactive-only) is loaded from .zshrc, not here. This file
+# runs for every shell invocation, so sourcing nvm.sh here would penalize even
+# non-interactive shells.
 
 # Deduplicate entries in PATH
 typeset -U PATH
@@ -235,4 +236,3 @@ if [ "$OS" = "Linux" ]; then
 fi
 
 # vim: ts=4 sw=4 tw=0 et ft=zsh :
-. "$XDG_DATA_HOME/cargo/env"
